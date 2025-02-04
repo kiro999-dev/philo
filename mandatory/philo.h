@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/04 18:05:55 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:43:39 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <time.h> 
 # include <pthread.h>
 #include <stdlib.h>
-
+#include <unistd.h>
 struct s_data ;
 struct s_philo;
 typedef struct s_forks

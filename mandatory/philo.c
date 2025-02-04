@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/04 18:22:23 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:51:15 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ int wait_philos(t_philo *philos)
 	}
 	return(1);
 }
+// void sleeping(t_philo *p)
+// {
+
+// }
+// void eating(t_philo *p)
+// {
+	
+// }
 void* dinner(void *d)
 {
 	t_philo *philos;
@@ -37,8 +45,8 @@ void* dinner(void *d)
  	while (wait_philos(philos))
 	{
 	}
-	// eating();
-	// sleeping();
+	// eating(philos);
+	// sleeping(philos);
 	// thinking();
 	return(NULL);
 }
