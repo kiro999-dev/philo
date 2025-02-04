@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/04 17:04:36 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:22:23 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,29 @@
 
 int wait_philos(t_philo *philos)
 {
-	static int n = 0;
-	pthread_mutex_lock(&philos->philo_mtx);
-	n++;
-	// if(n == philos->data->philo_number)
-	// 	return(0);
-	printf("philo %d lock\n",philos->philo_id);
-	pthread_mutex_unlock(&philos->philo_mtx);
-	printf("philo %d unlock\n",philos->philo_id);
+	if(philos->philo_vist == 0)
+	{
+		pthread_mutex_lock(&philos->data->philo_mtx);
+		philos->philo_vist = 1;
+	}
+	if(philos->data->isready == philos->data->philo_number)
+		return(0);
+	else if(philos->philo_vist == 1)
+	{
+		philos->data->isready++;
+		philos->philo_vist = 2;
+		pthread_mutex_unlock(&philos->data->philo_mtx);
+	}
 	return(1);
 }
-void* dinner(void *data)
+void* dinner(void *d)
 {
-	t_data *d;
+	t_philo *philos;
 
-	d = (t_data *) data;
-	int i = 0;
-	printf("%d\n",d->philo_number);
- 	while (i < d->philo_number)
+	philos = (t_philo *) d;
+ 	while (wait_philos(philos))
 	{
-		wait_philos(&d->philo_class[i]);
-		i++;
 	}
-	
-	// 
-	// 
 	// eating();
 	// sleeping();
 	// thinking();
@@ -60,7 +58,7 @@ void creat_philos(t_data *d)
 	
 	while (i < d->philo_number)
 	{
-		if(pthread_create(&d->philo_class[i].philos_t,NULL, dinner, d) != 0)
+		if(pthread_create(&d->philo_class[i].philos_t,NULL, dinner, &d->philo_class[i]) != 0)
 			return;
 		i++;
 	}
