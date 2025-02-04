@@ -1,5 +1,5 @@
 DIR = mandatory
-SRC = $(DIR)/philo.c $(DIR)/ft_atoi.c $(DIR)/error_msg.c
+SRC = $(DIR)/philo.c $(DIR)/ft_atoi.c $(DIR)/error_msg.c $(DIR)/philo_init.c $(DIR)/init_mutex.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
 INC = philo.h
