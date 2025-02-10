@@ -11,7 +11,24 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+size_t	get_current_time(void)
+{
+	struct timeval	time;
 
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+void ft_usleep(size_t time)
+{
+	size_t start;
+
+	start = get_current_time();
+	while ((get_current_time() - start )< time)
+	{
+		usleep(500);
+	}
+}
 int wait_philos(t_philo *philos)
 {
 	if(philos->philo_vist == 0)
@@ -29,20 +46,40 @@ int wait_philos(t_philo *philos)
 	}
 	return(1);
 }
-// void sleeping(t_philo *p)
-// {
+void sleeping(t_philo *p)
+{
+	size_t time;
 
-// }
+	pthread_mutex_lock(&p->data->philo_mtx);
+	time = get_current_time() - p->data->start_time;
+	printf("%ld %d is sleeping\n",time,p->philo_id);
+	pthread_mutex_unlock(&p->data->philo_mtx);
+
+}
 void eating(t_philo *p)
 {
+	size_t timx;
+
 	pthread_mutex_lock(&p->fork1->fork);
-	printf("%d take fork %d\n",p->philo_id,p->fork1->fork_id);
+
+	timx = get_current_time() - p->data->start_time;
+	printf("%ld %d take fork %d\n",timx,p->philo_id,p->fork1->fork_id);
 	pthread_mutex_lock(&p->fork2->fork);
-	printf("%d take fork %d\n",p->philo_id,p->fork2->fork_id);
-	printf("%d eating\n",p->philo_id);
-	usleep(10000);
+	timx = get_current_time() - p->data->start_time;
+	printf("%ld %d take fork %d\n",timx,p->philo_id,p->fork2->fork_id);
+	printf("%ld %d eating\n",timx,p->philo_id);
+	ft_usleep(200);
 	pthread_mutex_unlock(&p->fork1->fork);
 	pthread_mutex_unlock(&p->fork2->fork);
+	
+}
+void thinking(t_philo *p)
+{
+	size_t time;
+	pthread_mutex_lock(&p->data->philo_mtx);
+	time = get_current_time() - p->data->start_time;
+	printf("%ld %d is thinking\n",time,p->philo_id);
+	pthread_mutex_unlock(&p->data->philo_mtx);
 }
 void* dinner(void *d)
 {
@@ -53,8 +90,9 @@ void* dinner(void *d)
 	{
 	}
 	eating(philos);
-	// sleeping(philos);
-	// thinking();
+	sleeping(philos);
+	ft_usleep(philos->data->time_to_sleep);
+	thinking(philos);
 	return(NULL);
 }
 void	fill_data(t_data *d, char **argv, int meal)
@@ -99,7 +137,7 @@ int  main(int argc, char **argv)
 	else if (argc == 5)
 		fill_data(&data, argv, ft_atoi(argv[4]));
 	else
-		print_msg();
+		return (print_msg());
 	if(data_init(&data))
 		return (1);
 	

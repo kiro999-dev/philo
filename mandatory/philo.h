@@ -13,7 +13,7 @@
 #ifndef PHILO_H
 # define PHILO_H
 # include <stdio.h>
-# include <time.h> 
+# include <sys/time.h> 
 # include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -31,8 +31,10 @@ typedef struct s_data
 	int			philo_number;
 	int			time_die;
 	int			time_to_sleep;
+	int			time_to_eat;
 	int			meal_num;
 	short int	isfull;
+	size_t		start_time;
 	int			isready;
 	int 		isready_count;
 	t_forks 	*forks_arr;
@@ -56,4 +58,5 @@ int	ft_atoi(const char *str);
 int	print_msg();
 int mutex_init(pthread_mutex_t *mtx);
 int	data_init(t_data *d);
+size_t	get_current_time(void);
 #endif
