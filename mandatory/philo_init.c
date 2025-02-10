@@ -19,15 +19,15 @@ void	philo_forks_inite2(t_data *d,int n)
 	i = 0;
 	while (i < n)
 	{
-		if(i == 0 || i == n - 1)
+		if (d->philo_class[i].philo_id % 2 == 0)
 		{
 			d->philo_class[i].fork1 = &d->forks_arr[i];
-			d->philo_class[i].fork2 = &d->forks_arr[n - (i + 1)];
+			d->philo_class[i].fork2 = &d->forks_arr[(i + 1) % d->philo_number];
 		}
 		else
 		{
-			d->philo_class[i].fork1 = &d->forks_arr[i];
-			d->philo_class[i].fork2 = &d->forks_arr[i+1];
+			d->philo_class[i].fork2 = &d->forks_arr[i];
+			d->philo_class[i].fork1 = &d->forks_arr[(i + 1) % d->philo_number];
 		}
 		i++;
 	}

@@ -33,10 +33,17 @@ int wait_philos(t_philo *philos)
 // {
 
 // }
-// void eating(t_philo *p)
-// {
-	
-// }
+void eating(t_philo *p)
+{
+	pthread_mutex_lock(&p->fork1->fork);
+	printf("%d take fork %d\n",p->philo_id,p->fork1->fork_id);
+	pthread_mutex_lock(&p->fork2->fork);
+	printf("%d take fork %d\n",p->philo_id,p->fork2->fork_id);
+	printf("%d eating\n",p->philo_id);
+	usleep(10000);
+	pthread_mutex_unlock(&p->fork1->fork);
+	pthread_mutex_unlock(&p->fork2->fork);
+}
 void* dinner(void *d)
 {
 	t_philo *philos;
@@ -45,7 +52,7 @@ void* dinner(void *d)
  	while (wait_philos(philos))
 	{
 	}
-	// eating(philos);
+	eating(philos);
 	// sleeping(philos);
 	// thinking();
 	return(NULL);
