@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/18 11:31:04 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:40:17 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+#define take_fork 1
+#define eat 2
+#define sleep 3
+#define die 4
+#define thinks 5
 struct s_data ;
 struct s_philo;
 typedef struct s_forks
@@ -33,7 +38,7 @@ typedef struct s_data
 	int			time_to_sleep;
 	int			time_to_eat;
 	int			meal_num;
-	short int	isfull;
+	int			meal_counter;
 	size_t		start_time;
 	int			isfinsh;
 	t_forks 	*forks_arr;
@@ -52,6 +57,8 @@ typedef struct s_philo
 	int 			meal_count;
 	t_forks			*fork1;
 	t_forks			*fork2;
+	short int	isfull;
+	int			checked;
 }	t_philo;
 
 
@@ -60,4 +67,9 @@ int	print_msg();
 int mutex_init(pthread_mutex_t *mtx);
 int	data_init(t_data *d);
 size_t	get_current_time(void);
+int is_not_finsh(pthread_mutex_t *mtx,int *isfinsh);
+void ft_usleep(size_t time,t_data *d);
+void creat_philos(t_data *d);
+void write_status(t_philo *p, int status);
+void check_sum(t_data *d);
 #endif

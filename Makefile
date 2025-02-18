@@ -1,10 +1,11 @@
 DIR = mandatory
-SRC = $(DIR)/philo.c $(DIR)/ft_atoi.c $(DIR)/error_msg.c $(DIR)/philo_init.c $(DIR)/init_mutex.c
+SRC = $(DIR)/philo.c $(DIR)/ft_atoi.c $(DIR)/error_msg.c $(DIR)/philo_init.c $(DIR)/init_mutex.c $(DIR)/status.c \
+	$(DIR)/write_status.c $(DIR)/philo_time.c $(DIR)/monitor.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
 INC = philo.h
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 PTHREAD = -pthread
 all: $(NAME)
 
@@ -15,9 +16,9 @@ $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean :
-	rm $(OBJ)
+	rm -f $(OBJ)
 
 fclean : clean
-	rm $(NAME)
+	rm -f $(NAME)
 	
 re : fclean all
