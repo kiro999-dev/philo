@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/04 18:43:39 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:31:04 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,24 @@ typedef struct s_data
 {
 	struct s_philo 	*philo_class;
 	int			philo_number;
-	int			time_die;
+	size_t			time_die;
 	int			time_to_sleep;
 	int			time_to_eat;
 	int			meal_num;
 	short int	isfull;
 	size_t		start_time;
-	int			isready;
-	int 		isready_count;
+	int			isfinsh;
 	t_forks 	*forks_arr;
 	pthread_mutex_t philo_mtx;
+	pthread_mutex_t finsh_mtx;
+	pthread_mutex_t check_mtx;
 }	t_data;
 
 typedef struct s_philo
 {
 	struct s_data	*data;
 	pthread_t		philos_t;
-	int 			last_eat;
+	size_t 			last_eat;
 	int 			philo_id;
 	int				philo_vist;
 	int 			meal_count;
