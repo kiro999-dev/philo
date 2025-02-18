@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:15:30 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/04 18:10:18 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:18:08 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	data_init(t_data *d)
 	int	n;
 	
 	n = d->philo_number;
-	d->start_time = get_current_time();
 	d->forks_arr = malloc(sizeof(t_forks) * n);
 	if(!d->forks_arr)
 		return (printf("malloc fail\n"), 1);
