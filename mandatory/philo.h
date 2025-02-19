@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/18 17:40:17 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:01:09 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_data
 	int			time_to_sleep;
 	int			time_to_eat;
 	int			meal_num;
-	int			meal_counter;
 	size_t		start_time;
 	int			isfinsh;
 	t_forks 	*forks_arr;
@@ -57,8 +56,8 @@ typedef struct s_philo
 	int 			meal_count;
 	t_forks			*fork1;
 	t_forks			*fork2;
-	short int	isfull;
-	int			checked;
+	short int		isfull;
+	int				checked;
 }	t_philo;
 
 
