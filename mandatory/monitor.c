@@ -44,19 +44,21 @@ int check_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->check_mtx);
 	return (0);
 }	
-void check_meals(t_data *d)
+int check_meals(t_data *d)
 {
 	int i;
 	int count;
 	i = 0;
+	count = 0;
 	while (i < d->philo_number)
 	{
 		if(d->philo_class[i].isfull)
 			count++;
 		i++;
 	}
-	if(count == d->philo_number+1)
-		finish(d);
+	if(count == d->philo_number)
+		return (1);
+	return(0);
 }
 void check_sum(t_data *d)
 {
@@ -72,6 +74,7 @@ void check_sum(t_data *d)
 				break;
 			i++;
 		}
-		check_meals(d);
+		if(check_meals(d))
+			finish(d);
 	}
 }

@@ -13,11 +13,13 @@ void eating(t_philo *p)
 	write_status(p,take_fork);
 	write_status(p,eat);
 	pthread_mutex_lock(&p->data->check_mtx);
-	if(!p->isfull)
-		p->meal_count++;
 	p->last_eat = get_current_time();
 	pthread_mutex_unlock(&p->data->check_mtx);
 	ft_usleep(p->data->time_to_eat,p->data);
+	pthread_mutex_lock(&p->data->check_mtx);
+	if(!p->isfull)
+		p->meal_count++;
+	pthread_mutex_unlock(&p->data->check_mtx);
 	pthread_mutex_unlock(&p->fork1->fork);
 	pthread_mutex_unlock(&p->fork2->fork);
 	
@@ -72,5 +74,4 @@ void creat_philos(t_data *d)
 			return;
 		i++;
 	}
-	
 }
