@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/19 13:01:09 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:20:40 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void ft_usleep(size_t time,t_data *d);
 void creat_philos(t_data *d);
 void write_status(t_philo *p, int status);
 void check_sum(t_data *d);
+void finish(t_data *d);
 #endif

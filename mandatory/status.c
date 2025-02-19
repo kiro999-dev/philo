@@ -1,6 +1,12 @@
 #include "philo.h"
 
-void eating(t_philo *p)
+void unlock(pthread_mutex_t *m1, pthread_mutex_t *m2, pthread_mutex_t *m3)
+{
+	pthread_mutex_unlock(m1);
+	pthread_mutex_unlock(m2);
+	pthread_mutex_unlock(m3);
+}
+void	eating(t_philo *p)
 {
 	pthread_mutex_lock(&p->fork1->fork);
 	if(!is_not_finsh(&p->data->finsh_mtx,&p->data->isfinsh))
@@ -19,10 +25,7 @@ void eating(t_philo *p)
 	pthread_mutex_lock(&p->data->check_mtx);
 	if(!p->isfull)
 		p->meal_count++;
-	pthread_mutex_unlock(&p->data->check_mtx);
-	pthread_mutex_unlock(&p->fork1->fork);
-	pthread_mutex_unlock(&p->fork2->fork);
-	
+	unlock(&p->fork1->fork,&p->fork2->fork,&p->data->check_mtx);
 }
 void thinking(t_philo *p)
 {
@@ -62,16 +65,14 @@ void creat_philos(t_data *d)
 	d->start_time = get_current_time();
 	while (i < d->philo_number)
 	{
-		if(pthread_create(&d->philo_class[i].philos_t,NULL, dinner, &d->philo_class[i]) != 0)
-			return;
+		pthread_create(&d->philo_class[i].philos_t,NULL, dinner, &d->philo_class[i]);
 		i++;
 	}
 	check_sum(d);
 	i = 0;
 	while (i < d->philo_number)
 	{
-		if(pthread_join(d->philo_class[i].philos_t,NULL) != 0)
-			return;
+		pthread_join(d->philo_class[i].philos_t,NULL);
 		i++;
 	}
 }
