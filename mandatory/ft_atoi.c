@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:31:40 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/04 09:49:52 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:35:26 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_atoi(const char *str)
 	}
 	else if (str[i] == '+')
 		i++;
-	while (str[i] >= '0' &&  str[i]<= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (res > ((9223372036854775807 - (str[i] - '0')) / 10) && flag == -1)
 			return (0);

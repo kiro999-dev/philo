@@ -6,13 +6,13 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 09:25:04 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/19 15:02:08 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:34:58 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	print_msg()
+int	print_msg(void)
 {
 	printf("nah take a example :4 800 200 200 [4]\n");
 	return (0);

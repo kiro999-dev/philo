@@ -1,42 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 18:33:31 by zkhourba          #+#    #+#             */
+/*   Updated: 2025/02/19 18:34:12 by zkhourba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int is_not_finsh(pthread_mutex_t *mtx,int *isfinsh)
+int	is_not_finsh(pthread_mutex_t *mtx, int *isfinsh)
 {
-	int val;
-	
+	int	val;
+
 	pthread_mutex_lock(mtx);
 	val = *isfinsh;
 	pthread_mutex_unlock(mtx);
-	return(val);
+	return (val);
 }
 
-void finish(t_data *d)
+void	finish(t_data *d)
 {
 	pthread_mutex_lock(&d->finsh_mtx);
 	d->isfinsh = 0;
 	pthread_mutex_unlock (&d->finsh_mtx);
 }
 
-int check_philo(t_philo *philo)
+int	check_philo(t_philo *philo)
 {
-	size_t elapsed;
-	
+	size_t	elapsed;
+
 	pthread_mutex_lock(&philo->data->check_mtx);
 	if (philo->last_eat == 0)
 	{
 		pthread_mutex_unlock(&philo->data->check_mtx);
 		return (0);
 	}
-	elapsed = get_current_time()- philo->last_eat; 
+	elapsed = get_current_time() - philo->last_eat;
 	if (philo->meal_count == philo->data->meal_num)
 	{
 		philo->isfull = 1;
 		pthread_mutex_unlock(&philo->data->check_mtx);
 		return (2);
 	}
-	if(elapsed > philo->data->time_die && !philo->isfull)
+	if (elapsed > philo->data->time_die && !philo->isfull)
 	{
-		write_status(philo,die);
+		write_status(philo, DIE);
 		finish(philo->data);
 		pthread_mutex_unlock(&philo->data->check_mtx);
 		return (1);
@@ -44,37 +56,40 @@ int check_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->check_mtx);
 	return (0);
 }	
-int check_meals(t_data *d)
+
+int	check_meals(t_data *d)
 {
-	int i;
-	int count;
+	int		i;
+	int		count;
+
 	i = 0;
 	count = 0;
 	while (i < d->philo_number)
 	{
-		if(d->philo_class[i].isfull)
+		if (d->philo_class[i].isfull)
 			count++;
 		i++;
 	}
-	if(count == d->philo_number)
+	if (count == d->philo_number)
 		return (1);
-	return(0);
+	return (0);
 }
-void check_sum(t_data *d)
+
+void	check_sum(t_data *d)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (is_not_finsh(&d->finsh_mtx,&d->isfinsh))
+	while (is_not_finsh(&d->finsh_mtx, &d->isfinsh))
 	{
 		i = 0;
-		while (is_not_finsh(&d->finsh_mtx,&d->isfinsh) && i < d->philo_number)
+		while (is_not_finsh(&d->finsh_mtx, &d->isfinsh) && i < d->philo_number)
 		{
-			if(check_philo(&d->philo_class[i]) == 1)
-				break;
+			if (check_philo(&d->philo_class[i]) == 1)
+				break ;
 			i++;
 		}
-		if(check_meals(d))
+		if (check_meals(d))
 			finish(d);
 	}
 }
