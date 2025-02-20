@@ -6,14 +6,36 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/19 18:38:23 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:56:22 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	*one_philo(void *data)
+{
+	t_data	*d;
+
+	d = (t_data *)data;
+	d->start_time = get_current_time();
+	printf("%ld 1 has taken a fork\n", d->start_time - get_current_time());
+	ft_usleep(d->time_die + 1, d);
+	printf ("%ld 1 died\n", get_current_time() - d->start_time);
+	return (NULL);
+}
+
 void	start(t_data *d)
 {
+	pthread_t	p1;
+
+	if (d->philo_number == 1)
+	{
+		if (pthread_create(&p1, NULL, one_philo, d) != 0)
+			return ;
+		if (pthread_join(p1, NULL) != 0)
+			return ;
+		return ;
+	}
 	creat_philos(d);
 }
 
@@ -43,16 +65,16 @@ int	free_data(t_data *d)
 	int	i;
 
 	i = 0;
-	free(d->forks_arr);
-	free(d->philo_class);
-	pthread_mutex_destroy(&d->check_mtx);
-	pthread_mutex_destroy(&d->philo_mtx);
-	pthread_mutex_destroy(&d->finsh_mtx);
 	while (i < d->philo_number)
 	{
 		pthread_mutex_destroy(&d->forks_arr[i].fork);
 		i++;
 	}
+	free(d->forks_arr);
+	free(d->philo_class);
+	pthread_mutex_destroy(&d->check_mtx);
+	pthread_mutex_destroy(&d->philo_mtx);
+	pthread_mutex_destroy(&d->finsh_mtx);
 	return (1);
 }
 
@@ -76,4 +98,5 @@ int	main(int argc, char **argv)
 		return (free_data(&data));
 	start(&data);
 	free_data(&data);
+	return (0);
 }
