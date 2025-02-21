@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/19 18:36:15 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:25:17 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ typedef struct s_philo
 	short int		isfull;
 }	t_philo;
 
-int		ft_atoi(const char *str);
+
+long long	ft_atoi(const char *str, int *flagerr);
 int		print_msg(void);
 int		mutex_init(pthread_mutex_t *mtx);
 int		data_init(t_data *d);

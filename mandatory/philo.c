@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/20 16:56:22 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:35:50 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,31 @@ void	start(t_data *d)
 	creat_philos(d);
 }
 
+int	check_args(char *arg)
+{
+	int			flag;
+	long long	val;
+
+	val = ft_atoi(arg, &flag);
+	if ( val > __INT_MAX__ || val <= 0 || flag )
+		return (1);
+	return (0);
+}
+
 int	fill_data(t_data *d, char **argv, int meal, int flag)
 {
-	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0
-		|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0)
+	int	flagerr;
+
+	if (check_args(argv[1]) || check_args(argv[2]) || check_args(argv[3])
+		|| check_args(argv[4]))
 	{
 		printf("Erorr in args values :)\n");
 		return (1);
 	}
-	d->philo_number = ft_atoi(argv[1]);
-	d->time_die = ft_atoi(argv[2]);
-	d->time_to_eat = ft_atoi(argv[3]);
-	d->time_to_sleep = ft_atoi(argv[4]);
+	d->philo_number = ft_atoi(argv[1], &flagerr);
+	d->time_die = ft_atoi(argv[2], &flagerr);
+	d->time_to_eat = ft_atoi(argv[3], &flagerr);
+	d->time_to_sleep = ft_atoi(argv[4], &flagerr);
 	if (meal < 0 && flag)
 	{
 		printf("meals are less than 0\n");
@@ -81,6 +94,7 @@ int	free_data(t_data *d)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	int		flagerr;
 
 	if (argc == 5)
 	{
@@ -89,7 +103,7 @@ int	main(int argc, char **argv)
 	}
 	else if (argc == 6)
 	{
-		if (fill_data(&data, argv, ft_atoi(argv[5]), 1))
+		if (fill_data(&data, argv, ft_atoi(argv[5], &flagerr), 1))
 			return (1);
 	}
 	else
