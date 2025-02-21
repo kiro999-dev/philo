@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:25:24 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/20 18:32:08 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:50:10 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,17 @@ void	creat_philos(t_data *d)
 	d->start_time = get_current_time();
 	while (i < d->philo_number)
 	{
-		pthread_create(&d->philo_class[i].philos_t,
-			NULL, dinner, &d->philo_class[i]);
+		if (pthread_create(&d->philo_class[i].philos_t,
+				NULL, dinner, &d->philo_class[i]) != 0)
+			return ;
 		i++;
 	}
 	check_sum(d);
 	i = 0;
 	while (i < d->philo_number)
 	{
-		pthread_join(d->philo_class[i].philos_t, NULL);
+		if (pthread_join(d->philo_class[i].philos_t, NULL) != 0)
+			return ;
 		i++;
 	}
 }
