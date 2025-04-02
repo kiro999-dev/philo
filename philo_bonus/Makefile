@@ -4,9 +4,8 @@ SRC = $(DIR)/philo_bonus.c $(DIR)/ft_atoi.c $(DIR)/philo_time_bonus.c $(DIR)/par
 OBJ = $(SRC:.c=.o)
 NAME = philo_bonus
 INC = philo_bonus.h
-CC = cc 
+CC = cc
 CFLAGS = -Wall -Wextra -Werror 
-
 PTHREAD = -pthread
 all: $(NAME)
 

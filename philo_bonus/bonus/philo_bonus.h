@@ -36,6 +36,7 @@ typedef struct s_data
 	sem_t           		*forks;
 	sem_t	        		*message;
 	sem_t	        		*finish;
+	sem_t					*start;
 	sem_t	        		*check;
 }	t_data;
 

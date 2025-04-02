@@ -3,13 +3,11 @@
 void	write_status(t_philo_bonus *p, int status)
 {
 	size_t		elapsed;
-	static int	f;
 
 	sem_wait(p->data->message);
 	elapsed = get_current_time() - p->data->start_time;
-	if (f == 0)
-		elapsed = 0;
-	f++;
+	if(elapsed == 1)
+		elapsed--;
 	if (status == EAT)
 		printf("%ld %d is eating\n", elapsed, p->philo_id);
 	if (status == DIE)
@@ -30,9 +28,11 @@ void	ft_create_semaphores(t_data *d)
 	sem_unlink("message");
 	sem_unlink("check");
 	sem_unlink("forks");
+	sem_unlink("start");
 	d->finish = sem_open("death", O_CREAT, 0600, 1);
 	d->check = sem_open("check", O_CREAT, 0600, 1);
 	d->message = sem_open("message", O_CREAT, 0600, 1);
+	d->start = sem_open("message", O_CREAT, 0600,0);
 	d->forks = sem_open("forks", O_CREAT, 0600,
 			d->philo_number);
 }
@@ -49,6 +49,7 @@ void	init_philo(t_data *d)
 		d->philo_class[i].meal_count = 0;
 		d->philo_class[i].last_eat = 0;
 		d->philo_class[i].pid = -1;
+		d->start_time = 0;
 		i++;
 	}
 }
