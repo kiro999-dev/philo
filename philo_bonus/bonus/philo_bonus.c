@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:51 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/08 12:44:53 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:22:07 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	take_forks(t_philo_bonus *p)
 {
-	
 	sem_wait(p->data->forks);
 	write_status(p, TAKE_FORK);
 	sem_wait(p->data->forks);
@@ -72,12 +71,11 @@ void	start_syc(t_data *d)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	
+
 	if (parsing(argc, argv, &data))
 		return (1);
 	if (init_data(&data))
 		return (1);
-	
 	sem_wait(data.finish);
 	data.start_time = get_current_time();
 	start_syc(&data);

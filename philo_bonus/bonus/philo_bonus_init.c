@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:38 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/08 12:17:49 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:21:37 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_destroy_all(t_data *d, t_philo_bonus *philo)
 void	write_status(t_philo_bonus *p, int status)
 {
 	long	elapsed;
-
 
 	sem_wait(p->data->message);
 	elapsed = get_current_time() - p->data->start_time;
