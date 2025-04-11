@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:15:30 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/20 14:18:37 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:36:56 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	philo_forks_inite(t_data *d, int n)
 		d->philo_class[i].philo_id = i + 1;
 		d->philo_class[i].meal_count = 0;
 		d->philo_class[i].data = d;
-		d->philo_class[i].philo_vist = 0;
 		d->philo_class[i].isfull = 0;
 		d->philo_class[i].last_eat = 0;
 		d->isfinsh = 1;
