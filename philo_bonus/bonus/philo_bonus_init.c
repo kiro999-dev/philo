@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:38 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/09 14:21:37 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:43:27 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_create_semaphores(t_data *d)
 	d->finish = sem_open("death", O_CREAT, 0600, 1);
 	d->check = sem_open("check", O_CREAT, 0600, 1);
 	d->message = sem_open("message", O_CREAT, 0600, 1);
-	d->start = sem_open("message", O_CREAT, 0600, 0);
 	d->forks = sem_open("forks", O_CREAT, 0600,
 			d->philo_number);
 }

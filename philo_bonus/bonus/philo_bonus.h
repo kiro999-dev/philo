@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:58 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/07 13:24:04 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:44:10 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_data
 	sem_t					*forks;
 	sem_t					*message;
 	sem_t					*finish;
-	sem_t					*start;
 	sem_t					*check;
 }	t_data;
 
