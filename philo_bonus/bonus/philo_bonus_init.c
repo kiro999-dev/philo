@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:38 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/11 16:43:27 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:41:42 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_destroy_all(t_data *d, t_philo_bonus *philo)
 
 void	write_status(t_philo_bonus *p, int status)
 {
-	long	elapsed;
+	size_t	elapsed;
 
 	sem_wait(p->data->message);
 	elapsed = get_current_time() - p->data->start_time;
@@ -74,6 +74,7 @@ void	init_philo(t_data *d)
 		d->philo_class[i].last_eat = 0;
 		d->philo_class[i].pid = -1;
 		d->start_time = 0;
+		d->all_full = 0;
 		i++;
 	}
 }

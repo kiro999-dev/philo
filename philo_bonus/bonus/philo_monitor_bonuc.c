@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:20:54 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/11 18:37:38 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:43:37 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*check_philos(void *data)
 			break ;
 		}
 		(sem_post(p->data->check), sem_wait(p->data->check));
-		if (p->data->all_full >= p->data->meal_num && p->data->meal_num != -1)
+		if (p->isfull)
 		{
 			sem_post(p->data->finish);
 			break ;

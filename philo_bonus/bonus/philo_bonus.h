@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:58 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/11 18:37:45 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:38:39 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_data
 	sem_t					*message;
 	sem_t					*finish;
 	sem_t					*check;
-	sem_t					*eating;
 	short int				all_full;
 }	t_data;
 
@@ -64,7 +63,7 @@ int			parsing(int argc, char **argv, t_data *d);
 void		write_status(t_philo_bonus *p, int status);
 int			init_data(t_data *d);
 size_t		get_current_time(void);
-void	ft_usleep(size_t time,t_data *d);
+void		ft_usleep(size_t time);
 void		*check_philos(void *data);
 void		ft_destroy_all(t_data *d, t_philo_bonus *philo);
 
