@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:51 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 19:45:48 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:48:54 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	take_forks(t_philo_bonus *p)
 
 void	eating(t_philo_bonus *p)
 {
+	
 	write_status(p, EAT);
 	sem_wait(p->data->meals);
 	if (p->data->meal_num != -1)
@@ -69,17 +70,17 @@ void	start_syc(t_data *d)
 			return ;
 		}
 		if (d->philo_class[i].pid == 0)
+		{
 			dinner_routine(&d->philo_class[i]);
-		usleep(100);
+			usleep(100);
+		}
+		
 		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int	i;
-
-	i = 0;
 	t_data	data;
 	if (parsing(argc, argv, &data))
 		return (1);
@@ -88,12 +89,7 @@ int	main(int argc, char **argv)
 	data.start_time = get_current_time();
 	sem_wait(data.finish);
 	start_syc(&data);
-	while (data.meal_num != -1 && i < data.philo_number)
-	{
-		sem_wait(data.eated_meals);
-		i++;
-	}
-
+	sem_wait(data.finish);
 	ft_destroy_all(&data, data.philo_class);
 	return (0);
 }
