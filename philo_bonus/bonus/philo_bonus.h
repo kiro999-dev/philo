@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:58 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 15:08:27 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:38:53 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_data
 	sem_t					*finish;
 	sem_t					*check;
 	sem_t					*meals;
-	short int				all_full;
-	int						isdead;
+	sem_t					*eated_meals;
+	
 }	t_data;
 
 typedef struct s_philo_bonus
@@ -58,6 +58,7 @@ typedef struct s_philo_bonus
 	size_t			last_eat;
 	int				philo_id;
 	int				meal_count;
+	int				isfull;
 
 }	t_philo_bonus;
 

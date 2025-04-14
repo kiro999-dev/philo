@@ -5,7 +5,7 @@ OBJ = $(SRC:.c=.o)
 NAME = philo_bonus
 INC = philo_bonus.h
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror 
 PTHREAD = -pthread
 all: $(NAME)
 

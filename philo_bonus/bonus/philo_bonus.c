@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:51 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 15:13:44 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:45:48 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void	start_syc(t_data *d)
 
 int	main(int argc, char **argv)
 {
+	int	i;
+
+	i = 0;
 	t_data	data;
 	if (parsing(argc, argv, &data))
 		return (1);
@@ -85,7 +88,12 @@ int	main(int argc, char **argv)
 	data.start_time = get_current_time();
 	sem_wait(data.finish);
 	start_syc(&data);
-	sem_wait(data.finish);
+	while (data.meal_num != -1 && i < data.philo_number)
+	{
+		sem_wait(data.eated_meals);
+		i++;
+	}
+
 	ft_destroy_all(&data, data.philo_class);
 	return (0);
 }
