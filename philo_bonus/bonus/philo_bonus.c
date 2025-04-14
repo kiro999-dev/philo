@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:51 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/11 18:44:06 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:13:44 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 void	take_forks(t_philo_bonus *p)
 {
 	sem_wait(p->data->forks);
+	
 	write_status(p, TAKE_FORK);
 	sem_wait(p->data->forks);
 	write_status(p, TAKE_FORK);
+	
 }
 
 void	eating(t_philo_bonus *p)
 {
 	write_status(p, EAT);
-	sem_wait(p->data->check);
+	sem_wait(p->data->meals);
 	if (p->data->meal_num != -1)
-		p->meal_count++;
-	if (p->meal_count > p->data->meal_num && p->isfull == 0)
 	{
-		p->isfull = 1;
+		p->meal_count++;
 	}
+	sem_post(p->data->meals);
+	sem_wait(p->data->check);
 	p->last_eat = get_current_time();
 	sem_post(p->data->check);
 	ft_usleep(p->data->time_to_eat);
@@ -76,7 +78,6 @@ void	start_syc(t_data *d)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-
 	if (parsing(argc, argv, &data))
 		return (1);
 	if (init_data(&data))
