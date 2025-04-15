@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:20:54 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 20:45:20 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:01:21 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,18 @@ void	*check_philos(void *data)
 	{
 		sem_wait(p->data->check);
 		elapsed = get_current_time() - p->last_eat;
-		if ((elapsed >= p->data->time_die && p->last_eat != 0))
+		if ((elapsed > p->data->time_die && p->last_eat != 0))
 		{
-			(write_status(p, DIE));
-			(sem_post(p->data->check)) ;
+			write_status(p, DIE);
+			sem_post(p->data->check);
 			sem_post(p->data->finish);
 		}
-		(sem_post(p->data->check));
+		sem_post(p->data->check);
 		sem_wait(p->data->meals);
-		if (p->meal_count >= p->data->meal_num + 1  && p->data->meal_num != -1)
-		{
-
-			sem_post(p->data->meals);
-			(sem_post(p->data->check));
+		if (p->meal_count >= p->data->meal_num + 1 && p->data->meal_num != -1)
 			sem_post(p->data->finish);
-		}
 		sem_post(p->data->meals);
+		usleep(100);
 	}
 	return (NULL);
 }

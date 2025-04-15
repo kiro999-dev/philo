@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:58 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 19:38:53 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:52:32 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_data
 	sem_t					*check;
 	sem_t					*meals;
 	sem_t					*eated_meals;
-	
+	sem_t					*start_sem;
 }	t_data;
 
 typedef struct s_philo_bonus

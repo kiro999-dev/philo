@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:38 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 19:39:08 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:58:04 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,16 @@ void	write_status(t_philo_bonus *p, int status)
 void	ft_create_semaphores(t_data *d)
 {
 	sem_unlink("death");
-	sem_unlink("message");
 	sem_unlink("check");
-	sem_unlink("forks");
 	sem_unlink("meals");
-	sem_unlink("counter");
+	sem_unlink("message");
+	sem_unlink("forks");
 	d->finish = sem_open("death", O_CREAT, 0600, 1);
 	d->check = sem_open("check", O_CREAT, 0600, 1);
 	d->meals = sem_open("meals", O_CREAT, 0600, 1);
 	d->message = sem_open("message", O_CREAT, 0600, 1);
 	d->forks = sem_open("forks", O_CREAT, 0600,
 			d->philo_number);
-	d->eated_meals = sem_open("counter",O_CREAT,0600,0);
 }
 
 void	init_philo(t_data *d)
