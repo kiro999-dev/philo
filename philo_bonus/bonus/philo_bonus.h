@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:58 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/15 12:52:32 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:30:57 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ size_t		get_current_time(void);
 void		ft_usleep(size_t time);
 void		*check_philos(void *data);
 void		ft_destroy_all(t_data *d, t_philo_bonus *philo);
+void		one_philo(t_data *d);
 
 #endif

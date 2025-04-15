@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/21 14:38:37 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:59:17 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*one_philo(void *data)
 	d = (t_data *)data;
 	d->start_time = get_current_time();
 	printf("%ld 1 has taken a fork\n", d->start_time - get_current_time());
-	ft_usleep(d->time_die + 1, d);
+	ft_usleep(d->time_die, d);
 	printf ("%ld 1 died\n", get_current_time() - d->start_time);
 	return (NULL);
 }

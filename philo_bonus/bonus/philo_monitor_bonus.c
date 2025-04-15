@@ -6,11 +6,30 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:20:54 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/15 14:01:21 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:30:47 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	one_philo(t_data *d)
+{
+	d->philo_class[0].pid = fork();
+	if (d->philo_class[0].pid == -1)
+	{
+		printf("fork fail\n");
+		return ;
+	}
+	else if (d->philo_class[0].pid == 0)
+	{
+		printf("0 1 has taken a fork\n");
+		ft_usleep(d->time_die);
+		printf("%ld 1 died\n", d->time_die);
+		exit(0);
+	}
+	else
+		waitpid(d->philo_class[0].pid, NULL, 0);
+}
 
 void	*check_philos(void *data)
 {
