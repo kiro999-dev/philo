@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/15 13:59:17 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:37:37 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv)
 		return (print_msg(), 1);
 	if (data_init(&data))
 		return (free_data(&data));
+	data.start_time = get_current_time();
 	start(&data);
 	free_data(&data);
 	return (0);

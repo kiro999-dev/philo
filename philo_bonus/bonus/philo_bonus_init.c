@@ -6,13 +6,13 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:38 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/15 14:29:58 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:15:47 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	ft_destroy_all(t_data *d, t_philo_bonus *philo)
+void	ft_clean_all(t_data *d, t_philo_bonus *philo)
 {
 	int	i;
 
@@ -24,7 +24,6 @@ void	ft_destroy_all(t_data *d, t_philo_bonus *philo)
 	sem_close(d->finish);
 	sem_close(d->forks);
 	sem_close(d->meals);
-	sem_close(d->eated_meals);
 	free(philo);
 }
 
@@ -50,16 +49,16 @@ void	write_status(t_philo_bonus *p, int status)
 
 void	ft_create_semaphores(t_data *d)
 {
-	sem_unlink("death");
-	sem_unlink("check");
-	sem_unlink("meals");
-	sem_unlink("message");
-	sem_unlink("forks");
-	d->finish = sem_open("death", O_CREAT, 0600, 1);
-	d->check = sem_open("check", O_CREAT, 0600, 1);
-	d->meals = sem_open("meals", O_CREAT, 0600, 1);
-	d->message = sem_open("message", O_CREAT, 0600, 1);
-	d->forks = sem_open("forks", O_CREAT, 0600,
+	sem_unlink("/death");
+	sem_unlink("/check");
+	sem_unlink("/meals");
+	sem_unlink("/message");
+	sem_unlink("/forks");
+	d->finish = sem_open("/death", O_CREAT, 0600, 1);
+	d->check = sem_open("/check", O_CREAT, 0600, 1);
+	d->meals = sem_open("/meals", O_CREAT, 0600, 1);
+	d->message = sem_open("/message", O_CREAT, 0600, 1);
+	d->forks = sem_open("/forks", O_CREAT, 0600,
 			d->philo_number);
 }
 

@@ -3,23 +3,26 @@ SRC = $(DIR)/philo.c $(DIR)/ft_atoi.c $(DIR)/error_msg.c $(DIR)/philo_init.c $(D
 	$(DIR)/write_status.c $(DIR)/philo_time.c $(DIR)/monitor.c $(DIR)/parsing_philo.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
-INC = philo.h
+
 CC = cc 
 CFLAGS = -Wall -Wextra -Werror 
 
 PTHREAD = -pthread
+
 all: $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CC) $(PTHREAD) $(CFLAGS) $(OBJ) -o $@
+$(NAME): $(OBJ)
+	$(CC) $(PTHREAD) $(CFLAGS) $(OBJ) -o $@ 
 
-%.o : %.c $(INC)
-	$(CC) $(CFLAGS) $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
-clean :
-	rm -f $(OBJ)
+clean:
+	rm -f $(OBJ) $(OBJ:.o=.d)
 
-fclean : clean
+fclean: clean
 	rm -f $(NAME)
 	
-re : fclean all
+re: fclean all
+
+-include $(OBJ:.o=.d)

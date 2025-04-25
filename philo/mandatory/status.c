@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:25:24 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/21 14:50:10 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:38:44 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ void	unlock(pthread_mutex_t *m1, pthread_mutex_t *m2, pthread_mutex_t *m3)
 void	eating(t_philo *p)
 {
 	pthread_mutex_lock(&p->fork1->fork);
-	if (!is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
-	{
-		pthread_mutex_unlock(&p->fork1->fork);
-		return ;
-	}
 	write_status(p, TAKE_FORK);
 	pthread_mutex_lock(&p->fork2->fork);
 	write_status(p, TAKE_FORK);
-	write_status(p, EAT);
+	if (!is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
+	{
+		pthread_mutex_unlock(&p->fork1->fork);
+		pthread_mutex_unlock(&p->fork2->fork);
+		return ;
+	}
 	pthread_mutex_lock(&p->data->check_mtx);
 	p->last_eat = get_current_time();
 	pthread_mutex_unlock(&p->data->check_mtx);
+	write_status(p, EAT);
 	ft_usleep(p->data->time_to_eat, p->data);
 	pthread_mutex_lock(&p->data->check_mtx);
 	if (!p->isfull)
@@ -49,9 +50,15 @@ void	sleeping(t_philo *p)
 
 void	*dinner(void *d)
 {
-	t_philo	*p;
+	t_philo		*p;
+	size_t		time;
 
 	p = (t_philo *) d;
+	time = p->data->start_time;
+	while (get_current_time() < time)
+		usleep(250);
+	if (p->philo_id % 2 != 0)
+		usleep(40 * 1000);
 	while (is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
 	{
 		pthread_mutex_lock(&p->data->check_mtx);
@@ -63,7 +70,7 @@ void	*dinner(void *d)
 		pthread_mutex_unlock(&p->data->check_mtx);
 		eating(p);
 		sleeping(p);
-		write_status(p, THINKS);
+		thinking(p);
 	}
 	return (NULL);
 }
@@ -73,7 +80,7 @@ void	creat_philos(t_data *d)
 	int	i;
 
 	i = 0;
-	d->start_time = get_current_time();
+	d->start_time = get_current_time() + d->philo_number * 10;
 	while (i < d->philo_number)
 	{
 		if (pthread_create(&d->philo_class[i].philos_t,

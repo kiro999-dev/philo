@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:15:30 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/14 14:59:23 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/22 20:48:43 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	philo_forks_inite2(t_data *d, int n)
 		}
 		else
 		{
-			d->philo_class[i].fork2 = &d->forks_arr[i];
 			d->philo_class[i].fork1 = &d->forks_arr[(i + 1) % d->philo_number];
+			d->philo_class[i].fork2 = &d->forks_arr[i];
 		}
 		i++;
 	}
@@ -53,6 +53,8 @@ int	philo_forks_inite(t_data *d, int n)
 		if (mutex_init(&d->finsh_mtx))
 			return (1);
 		if (mutex_init(&d->philo_mtx))
+			return (1);
+		if (mutex_init(&d->msg))
 			return (1);
 		i++;
 	}

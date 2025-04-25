@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:51 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/15 14:31:03 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:55:49 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ int	main(int argc, char **argv)
 	if (data.philo_number == 1)
 	{
 		one_philo(&data);
-		ft_destroy_all(&data, data.philo_class);
+		ft_clean_all(&data, data.philo_class);
 		return (0);
 	}
 	sem_wait(data.finish);
 	start_syc(&data);
 	sem_wait(data.finish);
-	ft_destroy_all(&data, data.philo_class);
+	ft_clean_all(&data, data.philo_class);
 	return (0);
 }

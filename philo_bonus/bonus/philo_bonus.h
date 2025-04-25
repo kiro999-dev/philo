@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:58 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/15 14:30:57 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:55:09 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,11 @@ typedef struct s_data
 	int						time_to_eat;
 	int						meal_num;
 	size_t					start_time;
-	int						isfinish;
 	sem_t					*forks;
 	sem_t					*message;
 	sem_t					*finish;
 	sem_t					*check;
 	sem_t					*meals;
-	sem_t					*eated_meals;
-	sem_t					*start_sem;
 }	t_data;
 
 typedef struct s_philo_bonus
@@ -69,7 +66,7 @@ int			init_data(t_data *d);
 size_t		get_current_time(void);
 void		ft_usleep(size_t time);
 void		*check_philos(void *data);
-void		ft_destroy_all(t_data *d, t_philo_bonus *philo);
+void		ft_clean_all(t_data *d, t_philo_bonus *philo);
 void		one_philo(t_data *d);
 
 #endif
