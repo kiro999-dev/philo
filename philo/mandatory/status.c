@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:25:24 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/08 20:28:59 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:18:55 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,6 @@ void	*dinner(void *d)
 		usleep(20 * 1000);
 	while (is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
 	{
-		pthread_mutex_lock(&p->data->check_mtx);
-		if (p->isfull)
-		{
-			pthread_mutex_unlock(&p->data->check_mtx);
-			break ;
-		}
-		pthread_mutex_unlock(&p->data->check_mtx);
 		eating(p);
 		sleeping(p);
 		thinking(p);
@@ -78,22 +71,27 @@ void	*dinner(void *d)
 void	creat_philos(t_data *d)
 {
 	int	i;
+	int	created;
 
 	i = 0;
+	created = 0;
 	d->start_time = get_current_time() + d->philo_number * 10;
 	while (i < d->philo_number)
 	{
 		if (pthread_create(&d->philo_class[i].philos_t,
 				NULL, dinner, &d->philo_class[i]) != 0)
-			return ;
+		{
+			printf("Failed to create thread %d\n", i);
+			break ;
+		}
+		created++;
 		i++;
 	}
 	check_sum(d);
 	i = 0;
-	while (i < d->philo_number)
+	while (i < created)
 	{
-		if (pthread_join(d->philo_class[i].philos_t, NULL) != 0)
-			return ;
+		pthread_join(d->philo_class[i].philos_t, NULL);
 		i++;
 	}
 }

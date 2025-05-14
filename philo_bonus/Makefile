@@ -6,7 +6,6 @@ NAME = philo_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 
-
 all: $(NAME)
 
 $(NAME): $(OBJ)

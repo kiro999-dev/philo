@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:02:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/08 20:53:30 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/14 09:49:04 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	write_status(t_philo *p, int status)
 	if (status == EAT && is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
 		printf("%ld %d is eating\n", elapsed, p->philo_id);
 	if (status == DIE && is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
+	{
 		printf("%ld %d died\n", elapsed, p->philo_id);
+		finish(p->data);
+	}
 	if (status == TAKE_FORK
 		&& is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
 		printf("%ld %d has taken a fork\n", elapsed, p->philo_id);

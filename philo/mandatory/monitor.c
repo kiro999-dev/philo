@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:33:31 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/05/08 21:44:33 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:25:43 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ int	check_philo(t_philo *philo)
 		elapsed = get_current_time() - philo->data->start_time;
 	else
 		elapsed = get_current_time() - philo->last_eat;
+
+	if (elapsed > philo->data->time_die)
+	{
+		write_status(philo, DIE);
+		pthread_mutex_unlock(&philo->data->check_mtx);
+		return (1);
+	}
 	if (philo->meal_count == philo->data->meal_num)
 	{
 		philo->isfull = 1;
 		pthread_mutex_unlock(&philo->data->check_mtx);
 		return (2);
-	}
-	if (elapsed > philo->data->time_die && !philo->isfull)
-	{
-		write_status(philo, DIE);
-		finish(philo->data);
-		pthread_mutex_unlock(&philo->data->check_mtx);
-		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->check_mtx);
 	return (0);
