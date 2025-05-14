@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:35 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/19 23:37:37 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:33:43 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	free_data(t_data *d)
 	free(d->forks_arr);
 	free(d->philo_class);
 	pthread_mutex_destroy(&d->check_mtx);
-	pthread_mutex_destroy(&d->philo_mtx);
 	pthread_mutex_destroy(&d->finsh_mtx);
 	return (1);
 }
@@ -61,15 +60,19 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	int		flagerr;
+	int		meals;
 
 	if (argc == 5)
 	{
-		if (fill_data(&data, argv, -1, 0))
+		if (fill_data(&data, argv, -1))
 			return (1);
 	}
 	else if (argc == 6)
 	{
-		if (fill_data(&data, argv, ft_atoi(argv[5], &flagerr), 1))
+		meals = ft_atoi(argv[5], &flagerr);
+		if (meals <= 0 || flagerr)
+			return (printf("Erorr in meals number\n"), 1);
+		if (fill_data(&data, argv, meals))
 			return (1);
 	}
 	else

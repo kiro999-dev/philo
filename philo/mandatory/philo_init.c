@@ -6,11 +6,21 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:15:30 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/22 20:48:43 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:53:35 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	print_msg(void)
+{
+	printf("pleas enter :\n");
+	printf("[number_of_philosophers] ");
+	printf("[time_to_die time] ");
+	printf("[to_eat time_to_sleep] ");
+	printf("[number_of_times_each_philosopher_must_eat](optional)\n");
+	return (0);
+}
 
 void	philo_forks_inite2(t_data *d, int n)
 {
@@ -51,8 +61,6 @@ int	philo_forks_inite(t_data *d, int n)
 		if (mutex_init(&d->check_mtx))
 			return (1);
 		if (mutex_init(&d->finsh_mtx))
-			return (1);
-		if (mutex_init(&d->philo_mtx))
 			return (1);
 		if (mutex_init(&d->msg))
 			return (1);

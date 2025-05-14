@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:08:31 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/07 13:18:24 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:46:19 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	parsing(int argc, char **argv, t_data *d)
 	else if (argc == 6)
 	{
 		if (check_args(argv[5]))
-			return (1);
+			return (printf("Erorr in meals val\n"), 1);
 		if (fill_data(argv, d, ft_atoi(argv[5], &flagerr)))
 			return (1);
 		else

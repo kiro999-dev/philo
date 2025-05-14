@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:02:55 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/19 23:39:19 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:53:30 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 
 void	thinking(t_philo *p)
 {
-	size_t	now;
-	size_t	since_last;
-
 	write_status(p, THINKS);
 	if (p->data->philo_number % 2 != 0)
 	{
 		if (p->data->time_to_sleep < p->data->time_to_eat)
 			ft_usleep(p->data->time_to_eat - p->data->time_to_sleep, p->data);
-		now = get_current_time();
-		since_last = now - p->last_eat;
-		if (since_last < (size_t)(p->data->time_die * 0.7))
-			usleep(1000);
+		usleep(1000);
 	}
 }
 

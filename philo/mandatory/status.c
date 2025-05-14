@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:25:24 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/19 23:38:44 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:28:59 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*dinner(void *d)
 	while (get_current_time() < time)
 		usleep(250);
 	if (p->philo_id % 2 != 0)
-		usleep(40 * 1000);
+		usleep(20 * 1000);
 	while (is_not_finsh(&p->data->finsh_mtx, &p->data->isfinsh))
 	{
 		pthread_mutex_lock(&p->data->check_mtx);

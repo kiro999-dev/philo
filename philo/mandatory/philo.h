@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:52:46 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/04/19 23:37:15 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:33:14 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_data
 	size_t			start_time;
 	int				isfinsh;
 	t_forks			*forks_arr;
-	pthread_mutex_t	philo_mtx;
 	pthread_mutex_t	finsh_mtx;
 	pthread_mutex_t	check_mtx;
 	pthread_mutex_t	msg;
@@ -71,6 +70,6 @@ void		creat_philos(t_data *d);
 void		write_status(t_philo *p, int status);
 void		check_sum(t_data *d);
 void		finish(t_data *d);
-int			fill_data(t_data *d, char **argv, int meal, int flag);
+int			fill_data(t_data *d, char **argv, int meal);
 void		thinking(t_philo *p);
 #endif

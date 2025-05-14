@@ -6,7 +6,7 @@
 /*   By: zkhourba <zkhourba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:37:52 by zkhourba          #+#    #+#             */
-/*   Updated: 2025/02/21 14:44:24 by zkhourba         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:52:07 by zkhourba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_args(char *arg)
 	return (0);
 }
 
-int	fill_data(t_data *d, char **argv, int meal, int flag)
+int	fill_data(t_data *d, char **argv, int meal)
 {
 	int	flagerr;
 
@@ -37,11 +37,6 @@ int	fill_data(t_data *d, char **argv, int meal, int flag)
 	d->time_die = ft_atoi(argv[2], &flagerr);
 	d->time_to_eat = ft_atoi(argv[3], &flagerr);
 	d->time_to_sleep = ft_atoi(argv[4], &flagerr);
-	if (meal < 0 && flag)
-	{
-		printf("meals are less than 0\n");
-		return (1);
-	}
 	d->meal_num = meal;
 	return (0);
 }
